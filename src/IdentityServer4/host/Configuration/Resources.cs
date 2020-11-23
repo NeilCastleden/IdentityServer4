@@ -28,6 +28,13 @@ namespace IdentityServerHost.Configuration
         public static readonly IEnumerable<ApiScope> ApiScopes =
             new[]
             {
+                new ApiScope
+                {
+                    Name = "cirrus-api",
+                    DisplayName = "Cirrus API",
+                    UserClaims = { "crs_firm_id", "crs_role" },
+                },
+
                 // local API scope
                 new ApiScope(LocalApi.ScopeName),
 
@@ -52,6 +59,11 @@ namespace IdentityServerHost.Configuration
         public static readonly IEnumerable<ApiResource> ApiResources = 
             new[]
             {
+                new ApiResource("cirrus-api", "Cirrus API" )
+                {
+                    Scopes = { "email", "profile", "cirrus-api", },
+                },
+
                 new ApiResource("resource1", "Resource 1")
                 {
                     ApiSecrets = { new Secret("secret".Sha256()) },
